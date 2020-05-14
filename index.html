@@ -22,14 +22,15 @@
 </style>
 <body>
 <h1>PWA app test</h1>
-<button class="add-button">Add to home screen</button>
+<button class="add-button">Add to home screen</button
 </body>
 </html>
 <script src="https://me.mauliksompura.in/pwatest/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-	let deferredPrompt;
+let deferredPrompt;
 const addBtn = document.querySelector('.add-button');
-addBtn.style.display = 'none';
+
+
 	window.addEventListener('beforeinstallprompt', (e) => {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
   e.preventDefault();
