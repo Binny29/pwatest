@@ -1,37 +1,35 @@
 <!doctype html>
 <head>
-<link rel="manifest" href="manifest.webmanifest" />
+<link rel="manifest" href="/manifest.json" />
+<meta name="theme-color" content="#2196f3">
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="application-name" content="PWA Workshop" />
-<meta name="apple-mobile-web-app-title" content="PWA Workshop" />
-<meta name="msapplication-starturl" content="index.html" />
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1, shrink-to-fit=no"
-/>
+<meta name="application-name" content="cookt" />
+<meta name="apple-mobile-web-app-title" content="cookt" />
+<meta name="msapplication-starturl" content="/index.html" />
+<meta  name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 </head>
-
-<style type="text/css">
-.add-button {
-  position: absolute;
-  top: 1px;
-  left: 1px;
-}
-	
-</style>
 <body>
 <h1>PWA app test</h1>
-<button class="add-button">Add to home screen</button
+<button class="add-button">Add to home screen</button>
 </body>
-</html>
 <script src="https://me.mauliksompura.in/pwatest/js/jquery-3.2.1.min.js"></script>
+</html>
+
 <script type="text/javascript">
+
+
+url="https://me.mauliksompura.in/pwatest/";
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register(url+'sw.js');
+}
+
+
 let deferredPrompt;
 const addBtn = document.querySelector('.add-button');
+ addBtn.style.display = 'none';
 
-
-	window.addEventListener('beforeinstallprompt', (e) => {
+  window.addEventListener('beforeinstallprompt', (e) => {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
   e.preventDefault();
   // Stash the event so it can be triggered later.
@@ -39,9 +37,10 @@ const addBtn = document.querySelector('.add-button');
   // Update UI to notify the user they can add to home screen
   addBtn.style.display = 'block';
 
+});
   addBtn.addEventListener('click', (e) => {
     // hide our user interface that shows our A2HS button
-    addBtn.style.display = 'none';
+   
     // Show the prompt
     deferredPrompt.prompt();
     // Wait for the user to respond to the prompt
@@ -54,12 +53,12 @@ const addBtn = document.querySelector('.add-button');
         deferredPrompt = null;
       });
   });
-});
 
-url="https://me.mauliksompura.in/pwatest/";
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register(url+'sw.js');
+  window.addEventListener('appinstalled', (event) => {
+ console.log('installed');
+});
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+  console.log('display-mode is standalone');
 }
 
 </script>
-
